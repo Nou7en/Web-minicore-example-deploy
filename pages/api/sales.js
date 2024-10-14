@@ -1,19 +1,18 @@
 import { MongoClient, ObjectId } from 'mongodb';
 
-
 async function handler(req, res) {
-    //connection
-    const client = await MongoClient.connect(
-        'mongodb+srv://tchenzhang:tonychen777@clusterbdd.qqqpwtn.mongodb.net/'
-        
-    );
-    //GET request
+    // Obtener la URI desde las variables de entorno
+    const uri = process.env.MONGODB_URI;
+
+    // Conectar a MongoDB usando la URI
+    const client = await MongoClient.connect(uri);
+    
+    // GET request
     if (req.method === 'GET') {
         const db = client.db('minicore');
 
         const salesCollection = db.collection('sales');
         const salesData = await salesCollection.find().toArray();
-        //res.status(200).json({ sales: data });
 
         // Obtener el nombre del vendedor para cada venta
         const salesWithSellerName = await Promise.all(
@@ -30,5 +29,6 @@ async function handler(req, res) {
 
     client.close();
 }
+
 
 export default handler;
