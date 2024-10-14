@@ -4,7 +4,8 @@ import { MongoClient, ObjectId } from 'mongodb';
 async function handler(req, res) {
     //connection
     const client = await MongoClient.connect(
-        'mongodb+srv://crud:crud123@web.gq8l24z.mongodb.net/?retryWrites=true&w=majority'
+        'mongodb+srv://tchenzhang:tonychen777@clusterbdd.qqqpwtn.mongodb.net/'
+        
     );
     //GET request
     if (req.method === 'GET') {
